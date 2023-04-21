@@ -3,6 +3,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const errorHandler = require('./api/error/error-handler')
 const unknownRoutesHandler = require('./api/error/unknown-routes-handler')
+const ytRoutes = require('./api/routes/yt-routes')
 
 // basic config
 const server = express()
@@ -11,9 +12,7 @@ server.use(express.json())
 server.use(cors({ origin: process.env.ALLOWED_ORIGIN }))
 
 // routes
-server.get('/', (req, res, next) => {
-	res.send('All good! server is running...')
-})
+server.use('/yt', ytRoutes)
 
 // error handing
 server.use(unknownRoutesHandler)
