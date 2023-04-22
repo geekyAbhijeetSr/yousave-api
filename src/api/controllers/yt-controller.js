@@ -13,7 +13,7 @@ exports.getVideoInfo = async (req, res, next) => {
 
 		const sortFn = (a, b) => {
 			if (a.contentLength && b.contentLength) {
-				return b.contentLength - a.contentLength
+				return Number(b.contentLength) - Number(a.contentLength)
 			} else {
 				return b.width - a.width
 			}
@@ -38,6 +38,7 @@ exports.getVideoInfo = async (req, res, next) => {
 
 		res.json(response)
 	} catch (err) {
+		console.error(err)
 		if (
 			err.name === 'TypeError' ||
 			err.message.split(':')[0] === 'No video id found' ||
