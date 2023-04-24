@@ -27,12 +27,13 @@ exports.getVideoInfo = async (req, res, next) => {
 			.sort(sortFn)
 		const videosNoAudio = info.formats.filter(f => !f.hasAudio).sort(sortFn)
 
+		const videos = [...videosWithAudio, ...videosNoAudio]
+
 		const response = {
 			all_info: info,
 			videoDetails: info.videoDetails,
 			audios,
-			videosWithAudio,
-			videosNoAudio,
+			videos,
 			ok: true,
 		}
 
